@@ -2,11 +2,13 @@ public class Nota {
     public static int contador = 0;
     public int numero;
     private Double valor;
-    private double media;
+    private Double soma;
+    private Double media;
 
     public Nota(Double valor) {
         this.numero = ++contador;
         this.valor = valor;
+        this.soma = soma;
         this.media = media;
     }
 
@@ -26,8 +28,9 @@ public class Nota {
         return this.valor;
     }
 
-    public double calcularMedia(Double valor) {
-        media = media + this.valor;
+    public Double calcularMedia(Double valor) {
+        soma = soma + this.valor;
+        media = soma / this.numero;
         return media;
     }
 }
