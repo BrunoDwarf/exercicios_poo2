@@ -8,19 +8,19 @@
  * Copyright notice      (Lista de Exercícios 3 - Exercício 4)
  */
 public class Q6 {
-    public static void main (String args[]) {
+    public static void main(String args[]) {
         Holder h = new Holder();
         h.held = 100;
         h.bump(h);
 
         System.out.println(h.held);
     }
-
-    class Holder {
-        public int held;
-        public void bump(Holder theHolder) {
-            theHolder.held++;
-        }
+}
+    
+class Holder {
+    public int held;
+    public void bump(Holder theHolder) {
+        theHolder.held++;
     }
 }
 
