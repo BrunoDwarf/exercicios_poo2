@@ -25,3 +25,8 @@ class Decrementer {
         decMe = decMe - 1.0;
     }
 }
+
+/*
+ * Questão 5 - Qual o valor que será printado na linha 18?
+ * Resposta - Será printado 12.3 pois d é uma variavél local e nao tem nada a ver com decMe.
+ */
