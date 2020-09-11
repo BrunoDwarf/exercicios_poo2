@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22a00abe-d433-4917-8539-dab8ab896edb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../exercicio3/.idea/exercicio3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599846676445</updated>
-      <workItem from="1599846678101" duration="2418000" />
+      <workItem from="1599846678101" duration="3719000" />
     </task>
     <task id="LOCAL-00001" summary="Acertando projeto lista_de_exercícios 4">
       <created>1599846793836</created>
@@ -96,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599846793836</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fazendo Exercício 2 da Lista de Exercícios 4.">
+      <created>1599849215315</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599849215315</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,7 +123,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Acertando projeto lista_de_exercícios 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Acertando projeto lista_de_exercícios 4" />
+    <MESSAGE value="Fazendo Exercício 2 da Lista de Exercícios 4." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fazendo Exercício 2 da Lista de Exercícios 4." />
   </component>
   <component name="WindowStateProjectService">
     <state width="1323" height="182" key="GridCell.Tab.0.bottom" timestamp="1599849083982">
