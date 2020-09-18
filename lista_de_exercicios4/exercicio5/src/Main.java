@@ -118,7 +118,7 @@ public class Main {
             System.out.println("Matrícula: " + vetorFuncionario[i].getMatricula());
             System.out.println("Nome: " + vetorFuncionario[i].getNome());
             System.out.println("Função: " + vetorFuncionario[i].getFuncao());
-            System.out.println("Salário: " + vetorFuncionario[i].getSalario();
+            System.out.println("Salário: " + vetorFuncionario[i].getSalario());
             System.out.println("\n");
         }
     }
