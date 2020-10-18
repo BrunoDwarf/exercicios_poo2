@@ -3,7 +3,7 @@
  *
  * Date                  (17/10/2020 - 16:12)
  *
- * author                (Bruno Rodrigues Souza - 20192101063)
+ * Author                (Bruno Rodrigues Souza - 20192101063)
  *
  * Copyright notice      (1° Avaliação - Atividade Individual Avaliativa)
  */
@@ -61,7 +61,11 @@ public abstract class Vendedor {
         return comissao;
     }
 
-    public abstract double calcularPagamento(double pagamento);
+    public abstract double calcularPagamento();
+
+    public String toString() {
+        return "\nMatrícula: " + matricula + "\nNome: " + nome + "\nQuantidade de Vendas: " + vendas + "\nPorcentagem da Comissão: " + comissao;
+    }
 
 }
 /*

@@ -3,13 +3,15 @@
  *
  * Date                  (17/10/2020 - 16:12)
  *
- * author                (Bruno Rodrigues Souza - 20192101063)
+ * Author                (Bruno Rodrigues Souza - 20192101063)
  *
  * Copyright notice      (1° Avaliação - Atividade Individual Avaliativa)
  */
 package vendedores;
 
-public class VendedorLoja extends template.Vendedor {
+import template.*;
+
+public class VendedorLoja extends Vendedor {
     private double salario, hora_extra;
 
     public VendedorLoja()
@@ -42,11 +44,16 @@ public class VendedorLoja extends template.Vendedor {
         return hora_extra;
     }
 
-    public double calcularPagamento(double pagamento)
+    public double calcularPagamento()
     {
+        double pagamento;
         pagamento = (getVendas() * getComissao()) + salario + hora_extra;
 
         return pagamento;
+    }
+
+    public String toString() {
+        return super.toString() + "\nSalário: " + salario + "\nQuantidade de Horas Extra: " + hora_extra + "\nPagamento: " + calcularPagamento();
     }
 }
 /*
