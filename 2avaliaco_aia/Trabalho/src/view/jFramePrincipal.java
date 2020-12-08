@@ -1,7 +1,7 @@
 /*
  * Classname             (jFramePrincipal)
  *
- * Date                  (28/11/2020 - 17:08)
+ * Date                  (08/12/2020 - 02:08)
  *
  * author                (Bruno Rodrigues Souza - 20192101063 / Lucas Vitiello - 20181105255)
  *
@@ -14,8 +14,10 @@ import controller.PetController;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import model.Pet;
 
@@ -31,8 +33,11 @@ public class jFramePrincipal extends javax.swing.JFrame {
     /** Creates new form jFramePrincipal */
     public jFramePrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        
+        
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -55,8 +60,10 @@ public class jFramePrincipal extends javax.swing.JFrame {
         btnNovo = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnFechar = new javax.swing.JToggleButton();
+        btnListar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("teste");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -75,9 +82,9 @@ public class jFramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("Nome do Pet");
 
-        jLabel3.setText("Altura");
+        jLabel3.setText("Altura do Pet");
 
         txtPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +94,7 @@ public class jFramePrincipal extends javax.swing.JFrame {
 
         jLabel4.setText("Peso");
 
-        jLabel5.setText("Data Nascimento");
+        jLabel5.setText("Ano da adoção");
 
         txtDataNasc.setToolTipText("");
 
@@ -112,6 +119,20 @@ public class jFramePrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Editar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,58 +140,68 @@ public class jFramePrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAltura, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPeso, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                        .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtAltura, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtPeso, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnListar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(186, Short.MAX_VALUE)
+                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnFechar))
-                .addGap(10, 10, 10)
-                .addComponent(jLabel2)
+                .addComponent(jLabel1)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
                     .addComponent(btnSalvar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnListar)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButton1)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnExcluir)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -182,24 +213,30 @@ public class jFramePrincipal extends javax.swing.JFrame {
         String nome = this.txtNome.getText();
         double altura = Double.parseDouble(this.txtAltura.getText());
         int peso = Integer.parseInt(this.txtPeso.getText());
-        LocalDate dataNascimento = LocalDate.now();
+        LocalDate anoNascimento = LocalDate.now();
         
-        if (!this.txtDataNasc.getText().equals("")) {
-            String[] dataNascArray = this.txtDataNasc.getText().split("/");
-            int ano = Integer.parseInt(dataNascArray[2]);
-            int mes = Integer.parseInt(dataNascArray[1]);
-            int dia = Integer.parseInt(dataNascArray[0]);
-            dataNascimento = LocalDate.of(ano, mes, dia);
-        }
+        int ano = Integer.parseInt(txtDataNasc.getText());
+        anoNascimento = anoNascimento.withYear(ano);
         
-        this.pet = new Pet(nome, dataNascimento, altura, peso);
+        this.pet = new Pet(nome, anoNascimento, altura, peso);
         try {
             if (this.listaPet.containsKey(this.key)) {
                 // Alterando Pet na lista
                 this.listaPet.put(this.key, this.pet);
+                System.out.println("\n Estou Editando!");
+                 this.listaPet.forEach((key, obj) -> {
+                   System.out.println(key + obj);
+            
+        });
             } else {
                 // Adicionando pet a lista
-                this.addPet(); 
+                this.addPet();
+                System.out.println("\n Estou Adicionando!");
+                this.listaPet.forEach((key, obj) -> {
+                   System.out.println(key + obj);
+            
+        });
+                
            }
         } catch (Exception e) {
             System.out.println("Erro: " + e);
@@ -219,11 +256,25 @@ public class jFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        this.listaPet.remove(this.key);
+        new Excluir(this, listaPet).setVisible(true);
+        setVisible(false);
+        dispose();
+        /*this.listaPet.remove(this.key);
         this.limparCampos();
+        System.out.println("\n Estou Excluindo!");
+         this.listaPet.forEach((key, obj) -> {
+                   System.out.println(key + obj);
+            
+        });*/
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        System.exit(0);
+
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        // TODO add your handling code here:
         PetController petCtrl = new PetController();
         ArrayList<String> listPetsString = new ArrayList<String>();
         
@@ -234,8 +285,19 @@ public class jFramePrincipal extends javax.swing.JFrame {
         String listaPetParaArquivoBinario = String.join(";", listPetsString);
         
         petCtrl.preencherArquivoBinario(listaPetParaArquivoBinario);
-        System.exit(0);
-    }//GEN-LAST:event_btnFecharActionPerformed
+        
+        new Listagem(this).setVisible(true);
+        setVisible(false);
+        dispose();
+        
+    }//GEN-LAST:event_btnListarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new Editar(this, listaPet).setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,6 +331,7 @@ public class jFramePrincipal extends javax.swing.JFrame {
             public void run() {
                 new jFramePrincipal().setVisible(true);
                 new jFramePrincipal().buscarPets();
+                
             }
         });
     }
@@ -281,6 +344,7 @@ public class jFramePrincipal extends javax.swing.JFrame {
     public void buscarPets() {
         PetController petCtrl = new PetController();
         String conteudoArquivo = petCtrl.lerArquivoBinario();
+        
         if (!conteudoArquivo.equals("")) {
             this.preencherTreeMapPet(conteudoArquivo);
             this.preencherJListaPet();
@@ -298,18 +362,17 @@ public class jFramePrincipal extends javax.swing.JFrame {
     }
     
     public void preencherTreeMapPet(String conteudoPets) {
+        LocalDate anoNasc = LocalDate.now();
         String[] listaPets = conteudoPets.split(";");
-        for(int i = 0; i < listaPets.length; i++) {
+        for(int i = 0; i < listaPets.length; i++) 
+        {
             String[] atributosPet = listaPets[i].split("\\+");
             String nome = atributosPet[0].split(":")[1];
             String data = atributosPet[1].split(":")[1];
-            int ano = Integer.parseInt(data.split("-")[0]);
-            int mes = Integer.parseInt(data.split("-")[1]);
-            int dia = Integer.parseInt(data.split("-")[2]);
-            LocalDate dataNasc = LocalDate.of(ano, mes, dia);
+            anoNasc = anoNasc.withYear(Integer.parseInt(data));
             double altura = Double.parseDouble(atributosPet[2].split(":")[1]);
             int peso = Integer.parseInt(atributosPet[3].split(":")[1]);
-            this.listaPet.put(i + "", new Pet(nome, dataNasc, altura, peso));
+            this.listaPet.put(i + "", new Pet(nome, anoNasc, altura, peso));
             System.out.println("TreeMap key " + i + " : " + this.listaPet.get(i + "").toString());
         }
     }
@@ -331,8 +394,10 @@ public class jFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JToggleButton btnFechar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

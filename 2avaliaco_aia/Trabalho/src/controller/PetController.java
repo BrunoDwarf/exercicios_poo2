@@ -1,7 +1,7 @@
 /*
  * Classname             (PetController)
  *
- * Date                  (28/11/2020 - 17:08)
+ * Date                  (08/12/2020 - 02:08)
  *
  * author                (Bruno Rodrigues Souza - 20192101063 / Lucas Vitiello - 20181105255)
  *
@@ -17,15 +17,21 @@ import java.io.FileOutputStream;
 
 public class PetController {
     
-    private static String origem = System.getProperty("user.dir") + "\\src\\controller\\BD.bin";
+    private static String origem = "BD.bin";
     
     public void preencherArquivoBinario(String content) {
         try {
+            if(!new File(origem).exists())
+            {
+                new File(origem).createNewFile();
+            }
+            
             System.out.println(content);
             File fileOrigin = new File(this.origem);
             FileOutputStream stream = new FileOutputStream(this.origem);
             stream.write(content.getBytes());
             stream.close();
+            
         } catch (Exception e) {
             System.out.println("Erro = " +  e);
         }

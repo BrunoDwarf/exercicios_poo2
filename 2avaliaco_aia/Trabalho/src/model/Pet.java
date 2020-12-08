@@ -1,7 +1,7 @@
 /*
  * Classname             (Pet)
  *
- * Date                  (28/11/2020 - 17:08)
+ * Date                  (08/12/2020 - 02:08)
  *
  * author                (Bruno Rodrigues Souza - 20192101063 / Lucas Vitiello - 20181105255)
  *
@@ -11,11 +11,12 @@ package model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Pet {
     
     private String nome;
-    private LocalDate dataNasc;
+    private LocalDate anoNasc;
     private double altura;
     private int peso;
     
@@ -23,20 +24,52 @@ public class Pet {
         
     }
     
-    public Pet(String nome, LocalDate dataNasc, double altura, int peso) {
+    public Pet(String nome, LocalDate anoNasc, double altura, int peso) {
         this.setNome(nome);
-        this.setDataNasc(dataNasc);
+        this.setDataNasc(anoNasc);
         this.setAltura(altura);
         this.setPeso(peso);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pet other = (Pet) obj;
+        if (Double.doubleToLongBits(this.altura) != Double.doubleToLongBits(other.altura)) {
+            return false;
+        }
+        if (this.peso != other.peso) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.anoNasc, other.anoNasc)) {
+            return false;
+        }
+        return true;
     }
     
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return "nome:" + this.getNome() + "+" +
-                "dataNasc:" + this.getDataNasc().format(formatter) + "+" +
-                "altura:" + this.getAltura() + "+" +
-                "peso:" + this.getPeso();
+        return "Nome:" + this.getNome() + "+" +
+                "AnoNasc:" + this.getAnoNasc().getYear() + "+" +
+                "Altura:" + this.getAltura() + "+" +
+                "Peso:" + this.getPeso();
     }
 
     /**
@@ -56,15 +89,15 @@ public class Pet {
     /**
      * @return the dataNasc
      */
-    public LocalDate getDataNasc() {
-        return dataNasc;
+    public LocalDate getAnoNasc() {
+        return anoNasc;
     }
 
     /**
-     * @param dataNasc the dataNasc to set
+     * @param anoNasc the dataNasc to set
      */
-    public void setDataNasc(LocalDate dataNasc) {
-        this.dataNasc = dataNasc;
+    public void setDataNasc(LocalDate anoNasc) {
+        this.anoNasc = anoNasc;
     }
 
     /**
